@@ -19,6 +19,7 @@ class GetMediasTest {
                 image = "an image",
                 date = 1588110350.85,
                 sport = Media.Sport(1, "Football"),
+                author = "an author"
             )
         )
 

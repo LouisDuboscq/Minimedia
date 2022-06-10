@@ -22,6 +22,7 @@ class MediaRepositoryTest {
             image = "an image",
             date = 1588110350.85,
             sport = Media.Sport(1, "Football"),
+            author = "an author"
         ),
         Media.Video(
             id = 2,
@@ -29,7 +30,8 @@ class MediaRepositoryTest {
             date = 1488133445.007,
             sport = Media.Sport(2, "Tennis"),
             thumb = "tennis thumb",
-            url = "an url"
+            url = "an url",
+            views = 1
         )
     )
 
