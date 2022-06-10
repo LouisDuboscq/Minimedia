@@ -17,6 +17,7 @@ android {
         targetSdk = 32
         versionCode = 1
         versionName = "1.0"
+        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
         getByName("release") {
@@ -52,5 +53,7 @@ dependencies {
     implementation("com.google.accompanist:accompanist-systemuicontroller:$accompanist")
     implementation("io.coil-kt:coil-compose:2.1.0")
 
+    androidTestImplementation("androidx.compose.ui:ui-test-junit4:$compose")
+    debugImplementation("androidx.compose.ui:ui-test-manifest:$compose")
     androidTestImplementation("androidx.compose.ui:ui-test-junit4:$compose")
 }

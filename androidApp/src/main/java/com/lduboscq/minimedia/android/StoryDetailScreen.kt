@@ -21,9 +21,11 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
+import com.lduboscq.minimedia.convertLongToTime
 import com.lduboscq.minimedia.presentation.DetailViewModel
 
 @Composable
@@ -39,7 +41,8 @@ fun StoryDetailScreen(
                 modifier = Modifier
                     .fillMaxWidth()
                     .height(200.dp)
-                    .background(Color.Red),
+                    .background(Color.Red)
+                    .testTag("story-image"),
                 contentDescription = state.story?.title,
                 contentScale = ContentScale.Crop
             )
@@ -54,7 +57,9 @@ fun StoryDetailScreen(
             )
             IconButton(
                 onClick = navigateBack,
-                modifier = Modifier.padding(8.dp),
+                modifier = Modifier
+                    .padding(8.dp)
+                    .testTag("back-button"),
             ) {
                 Icon(Icons.Filled.ArrowBack, null, tint = Color.White)
             }
@@ -88,11 +93,13 @@ fun StoryDetailScreen(
                 style = LocalTextStyle.current.copy(color = Color(0XFF4eaeff))
             )
         }
-        Text(
-            "${state.story?.date}",
-            modifier = Modifier.padding(horizontal = 16.dp),
-            style = LocalTextStyle.current.copy(color = Color(0XFFd8d8d8))
-        )
+        state.story?.date?.let {
+            Text(
+                convertLongToTime((it * 1000).toLong()),
+                modifier = Modifier.padding(horizontal = 16.dp),
+                style = LocalTextStyle.current.copy(color = Color(0XFFd8d8d8))
+            )
+        }
 
         Text(
             state.story?.teaser ?: "",

@@ -7,14 +7,17 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Card
 import androidx.compose.material3.CenterAlignedTopAppBar
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.LocalTextStyle
 import androidx.compose.material3.MaterialTheme
@@ -26,6 +29,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
@@ -42,7 +46,12 @@ fun HomeScreen(
 ) {
 
     if (state.loading) {
-        Text("LOADING")
+        CircularProgressIndicator(
+            modifier = Modifier
+                .fillMaxSize()
+                .wrapContentSize(Alignment.Center)
+                .testTag("progress-indicator")
+        )
     }
 
     Scaffold(
@@ -75,7 +84,7 @@ fun HomeScreen(
 }
 
 @Composable
-private fun VideoItem(
+fun VideoItem(
     video: Media.Video,
     onClick: () -> Unit,
     modifier: Modifier = Modifier
@@ -84,13 +93,15 @@ private fun VideoItem(
 }
 
 @Composable
-private fun StoryItem(
+fun StoryItem(
     story: Media.Story,
     onClick: () -> Unit,
     modifier: Modifier = Modifier
 ) {
     Card(
-        modifier = modifier.padding(horizontal = 8.dp),
+        modifier = modifier
+            .padding(horizontal = 8.dp)
+            .testTag("story-card"),
         onClick = onClick
     ) {
         Column {
@@ -100,7 +111,8 @@ private fun StoryItem(
                     modifier = Modifier
                         .fillMaxWidth()
                         .height(200.dp)
-                        .background(Color.Red),
+                        .background(Color.Red)
+                        .testTag("story-image"),
                     contentDescription = story.title,
                     contentScale = ContentScale.Crop
                 )
@@ -129,7 +141,7 @@ private fun StoryItem(
                 )
             )
             Text(
-                "By ${story.author} - ${convertLongToTime(/*System.currentTimeMillis() +*/ (story.date * 1000).toLong())}",
+                "By ${story.author} - ${convertLongToTime((story.date * 1000).toLong())}",
                 modifier = Modifier.padding(start = 8.dp, end = 8.dp, bottom = 8.dp),
                 style = LocalTextStyle.current.copy(color = Color(0XFFd8d8d8))
             )
