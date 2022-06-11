@@ -8,7 +8,7 @@ sealed class Media {
         val date: Double,
         val sport: Sport,
         val url: String,
-        val views: Int
+        val views: Long
     ): Media()
 
     data class Sport(

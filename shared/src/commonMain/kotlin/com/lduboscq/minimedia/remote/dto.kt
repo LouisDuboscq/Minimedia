@@ -16,7 +16,7 @@ data class VideoDto(
     val date: Double,
     val sport: SportDto,
     val url: String,
-    val views: Int
+    val views: Long
 )
 
 @Serializable
