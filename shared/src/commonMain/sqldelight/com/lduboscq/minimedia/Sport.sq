@@ -1,0 +1,14 @@
+CREATE TABLE sport_Entity (
+     id INTEGER NOT NULL PRIMARY KEY,
+     name TEXT NOT NULL
+);
+
+insertOrReplace:
+INSERT OR REPLACE INTO sport_Entity VALUES ?;
+
+selectById:
+SELECT * FROM sport_Entity
+WHERE id = ?;
+
+selectAll:
+SELECT * FROM sport_Entity;

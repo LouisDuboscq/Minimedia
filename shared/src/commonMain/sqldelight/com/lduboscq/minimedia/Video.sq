@@ -1,0 +1,21 @@
+CREATE TABLE video_Entity (
+    id INTEGER NOT NULL PRIMARY KEY,
+    title TEXT NOT NULL,
+    date  REAL AS Double NOT NULL,
+    thumb TEXT NOT NULL,
+    url TEXT NOT NULL,
+    views INTEGER NOT NULL,
+    sport_id INTEGER NOT NULL,
+
+    FOREIGN KEY (sport_id) REFERENCES sport_Entity(id)
+);
+
+insertOrReplace:
+INSERT OR REPLACE INTO video_Entity VALUES ?;
+
+selectById:
+SELECT * FROM video_Entity
+WHERE id = ?;
+
+selectAll:
+SELECT * FROM video_Entity;
