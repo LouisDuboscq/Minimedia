@@ -56,4 +56,6 @@ dependencies {
     androidTestImplementation("androidx.compose.ui:ui-test-junit4:$compose")
     debugImplementation("androidx.compose.ui:ui-test-manifest:$compose")
     androidTestImplementation("androidx.compose.ui:ui-test-junit4:$compose")
+
+    implementation("com.google.android.exoplayer:exoplayer:2.17.1")
 }

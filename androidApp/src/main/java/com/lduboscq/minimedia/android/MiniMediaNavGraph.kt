@@ -1,9 +1,12 @@
 package com.lduboscq.minimedia.android
 
+import android.app.Activity
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.ui.platform.LocalContext
 import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -11,6 +14,7 @@ import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import com.lduboscq.minimedia.presentation.DetailViewModel
 import com.lduboscq.minimedia.presentation.HomeViewModel
+import kotlinx.coroutines.launch
 
 @Composable
 fun MiniMediaNavGraph(
@@ -18,6 +22,7 @@ fun MiniMediaNavGraph(
     detailViewModel: DetailViewModel
 ) {
     val navController = rememberNavController()
+    val context = LocalContext.current
 
     NavHost(
         navController = navController,
@@ -26,7 +31,7 @@ fun MiniMediaNavGraph(
 
         composable("home") {
             val state by homeViewModel.uiState.collectAsState()
-
+            val scope = rememberCoroutineScope()
             LaunchedEffect(Unit) { homeViewModel.init() }
 
             HomeScreen(
@@ -34,7 +39,10 @@ fun MiniMediaNavGraph(
                 onClickArticle = { articleId: Long ->
                     navController.navigate("articles/$articleId")
                 },
-                //onClickVideo = { vm.openVideo(it) }
+                onClickVideo = { scope.launch { homeViewModel.onClickVideo(it) } },
+                effects = homeViewModel.effect,
+                onDispose = { scope.launch { homeViewModel.onDispose(it) } },
+                navigateBack = { (context as? Activity)?.finish() }
             )
         }
 
