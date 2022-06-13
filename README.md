@@ -1,9 +1,9 @@
-Minimedia is a minimal sample media app 
+Minimedia is a small demo application of a media. 
+The application knows how to retrieve articles and videos from a URL, 
+store information to manage an offline mode, display data, 
+play videos and read article details.
 
-![video](art/Screenshot_20220613_114339.png)
-![videos](art/Screenshot_20220613_114415.png)
-![articles](art/Screenshot_20220613_114438.png)
-![detail](art/Screenshot_20220613_114445.png)
+![app](art/img.png)
 
 # Tech
 
